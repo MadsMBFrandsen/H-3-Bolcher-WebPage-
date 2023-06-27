@@ -6,22 +6,45 @@
 
 <div class="text-center">
     <h1 class="display-4">Bolcher</h1>
-    
+
     <button class="btn btn-success" onclick="BtnHide()">Delete Content</button>
 </div>
 <form method="post">
     <table>
         <tr>
             <td><input type="submit" id="btnVisalle" value="Vis alle" asp-page-handler="Visalle" /></td>
-            <td><input type="search" id="TextSearch" name="SearchBox"  asp-page-handler="TextSearch" /></td>
+            <td><input type="search" id="TextSearch" maxlength="50" name="SearchBox" asp-page-handler="TextSearch" /></td>
             <td><input type="submit" id="btnSearch" value="Search" asp-page-handler="Search" /></td>
             <td>FromBegining</td>
             <td><input type="checkbox" id="CheckSearch" name="CheckFromBegining" asp-page-handler="CheckSearch" /></td>
+            <td>
+                <select name="FaveSelect">
+                    <option value="">Ingen Farve</option>
+                    <option value="Rød">Rød</option>
+                    <option value="Orange">Orange</option>
+                    <option value="Gul">Gul</option>
+                    <option value="Sort">Sort</option>
+                    <option value="Lyseblå">Lyseblå</option>
+                    <option value="Blå">Blå</option>
+                </select>
+            </td>
 
             @*<td><input type="submit" id="btnSearch" value="Search" asp-page-handler="Search" /></td>*@
         </tr>
     </table>
 </form>
+@if (@Model.Message != "")
+{
+    <div class="mt-3">
+        <h1>@Model.Message</h1>
+    </div>
+}
+@if (Model.bolchers.Count == 0 && Model.NumberCount=="1")
+{
+    <div class="mt-3">
+        <h1>Ingen Bolcher med De Søgekriterier i databasen</h1>
+    </div>
+}
 @if (Model.bolchers.Count != 0)
 {
     <table id="BolcherList">
@@ -59,16 +82,6 @@
         document.getElementById("BolcherList").innerHTML = "";
     }
 </script>
-
-
-<script type="text/javascript">
-    $('#BtnHide').click(function () {
-        //$('#BolcherList').hide();
-        $("#BolcherList").html("");
-    });
-</script>
-
-
 
 
 @if (ViewData["Message"] != null)

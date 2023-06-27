@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Fungtions\" />
+    <Folder Include="JS\" />
   </ItemGroup>
 
   <ItemGroup>

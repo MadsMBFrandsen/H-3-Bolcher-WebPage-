@@ -208,5 +208,195 @@ namespace H_3_Bolcher__WebPage_.Database
 
             return list;
         }
+
+        public List<Bolcher> /*Bolcher*/ GetAllBolcherWhereSearchWordIsFromBeginingWithColor(string SearchBox,string Color)
+        {
+            List<Bolcher> list = new List<Bolcher>();
+            Bolcher b = null;
+            string queryString = " EXEC GetAllBolcherWhereSearchWordIsFromBeginingWithColor @SearchWord =" + SearchBox+", @Color ="+Color;
+            
+
+            //DB connection inside a using clause to ensure the closing of connection when done.
+            using (SqlConnection connection = new SqlConnection(CornectionString))
+            {
+                //OPEN CONNECTION
+                connection.Open();
+
+                //SqlCommand command = new SqlCommand(queryString, connection);
+                //command.Connection.Open();
+                //command.ExecuteNonQuery();
+
+                //Create a new SQL query command
+                using (SqlCommand command = new SqlCommand(queryString, connection))
+                {
+                    command.CommandText = queryString;
+                    //SqlCommand sqlc = new SqlCommand(queryString, connection);
+                    //sqlc.ExecuteNonQuery();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+
+
+                        //Read the data
+                        while (reader.Read())
+                        {
+                            int Id = (int)reader["Id"];
+                            string Navn = (string)reader["Navn"];
+                            string Faver = (string)reader["FaveNavn"];
+                            int Vægt_i_gram = (int)reader["Vægt_i_gram"];
+                            string Smag_Surhed = (string)reader["SsuNavn"];
+                            string Smag_Styrke = (string)reader["SstNavn"];
+                            string Smag_Type = (string)reader["StNavn"];
+                            int Råvarepris_i_øre = (int)reader["Råvarepris_i_øre"];
+
+                            //do stuff 
+                            list.Add(new Bolcher()
+                            {
+                                Id = Id,
+                                Navn = Navn,
+                                Faver = Faver,
+                                Vægt_i_gram = Vægt_i_gram,
+                                Smag_Surhed = Smag_Surhed,
+                                Smag_Styrke = Smag_Styrke,
+                                Smag_Type = Smag_Type,
+                                Råvarepris_i_øre = Råvarepris_i_øre,
+                            });
+
+                        }
+
+                    }
+                    ////Execute the command and send the query to the database with a data reader
+                }
+                //not necessary 
+                connection.Close();
+            }
+
+            return list;
+        }
+        public List<Bolcher> /*Bolcher*/ GetAllBolcherWhereSearchWordIsWithColor(string SearchBox, string Color)
+        {
+            List<Bolcher> list = new List<Bolcher>();
+            Bolcher b = null;
+            string queryString = " EXEC GetAllBolcherWhereSearchWordIsWithColor @SearchWord =" + SearchBox + ", @Color =" + Color;
+
+
+            //DB connection inside a using clause to ensure the closing of connection when done.
+            using (SqlConnection connection = new SqlConnection(CornectionString))
+            {
+                //OPEN CONNECTION
+                connection.Open();
+
+                //SqlCommand command = new SqlCommand(queryString, connection);
+                //command.Connection.Open();
+                //command.ExecuteNonQuery();
+
+                //Create a new SQL query command
+                using (SqlCommand command = new SqlCommand(queryString, connection))
+                {
+                    command.CommandText = queryString;
+                    //SqlCommand sqlc = new SqlCommand(queryString, connection);
+                    //sqlc.ExecuteNonQuery();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+
+
+                        //Read the data
+                        while (reader.Read())
+                        {
+                            int Id = (int)reader["Id"];
+                            string Navn = (string)reader["Navn"];
+                            string Faver = (string)reader["FaveNavn"];
+                            int Vægt_i_gram = (int)reader["Vægt_i_gram"];
+                            string Smag_Surhed = (string)reader["SsuNavn"];
+                            string Smag_Styrke = (string)reader["SstNavn"];
+                            string Smag_Type = (string)reader["StNavn"];
+                            int Råvarepris_i_øre = (int)reader["Råvarepris_i_øre"];
+
+                            //do stuff 
+                            list.Add(new Bolcher()
+                            {
+                                Id = Id,
+                                Navn = Navn,
+                                Faver = Faver,
+                                Vægt_i_gram = Vægt_i_gram,
+                                Smag_Surhed = Smag_Surhed,
+                                Smag_Styrke = Smag_Styrke,
+                                Smag_Type = Smag_Type,
+                                Råvarepris_i_øre = Råvarepris_i_øre,
+                            });
+
+                        }
+
+                    }
+                    ////Execute the command and send the query to the database with a data reader
+                }
+                //not necessary 
+                connection.Close();
+            }
+
+            return list;
+        }
+        public List<Bolcher> /*Bolcher*/ GetAllBolcherWithColor( string Color)
+        {
+            List<Bolcher> list = new List<Bolcher>();
+            Bolcher b = null;
+            string queryString = " EXEC GetAllBolcherWithColor @Color =" + Color;
+
+
+            //DB connection inside a using clause to ensure the closing of connection when done.
+            using (SqlConnection connection = new SqlConnection(CornectionString))
+            {
+                //OPEN CONNECTION
+                connection.Open();
+
+                //SqlCommand command = new SqlCommand(queryString, connection);
+                //command.Connection.Open();
+                //command.ExecuteNonQuery();
+
+                //Create a new SQL query command
+                using (SqlCommand command = new SqlCommand(queryString, connection))
+                {
+                    command.CommandText = queryString;
+                    //SqlCommand sqlc = new SqlCommand(queryString, connection);
+                    //sqlc.ExecuteNonQuery();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+
+
+                        //Read the data
+                        while (reader.Read())
+                        {
+                            int Id = (int)reader["Id"];
+                            string Navn = (string)reader["Navn"];
+                            string Faver = (string)reader["FaveNavn"];
+                            int Vægt_i_gram = (int)reader["Vægt_i_gram"];
+                            string Smag_Surhed = (string)reader["SsuNavn"];
+                            string Smag_Styrke = (string)reader["SstNavn"];
+                            string Smag_Type = (string)reader["StNavn"];
+                            int Råvarepris_i_øre = (int)reader["Råvarepris_i_øre"];
+
+                            //do stuff 
+                            list.Add(new Bolcher()
+                            {
+                                Id = Id,
+                                Navn = Navn,
+                                Faver = Faver,
+                                Vægt_i_gram = Vægt_i_gram,
+                                Smag_Surhed = Smag_Surhed,
+                                Smag_Styrke = Smag_Styrke,
+                                Smag_Type = Smag_Type,
+                                Råvarepris_i_øre = Råvarepris_i_øre,
+                            });
+
+                        }
+
+                    }
+                    ////Execute the command and send the query to the database with a data reader
+                }
+                //not necessary 
+                connection.Close();
+            }
+
+            return list;
+        }
     }
 }

@@ -9,9 +9,9 @@ namespace H_3_Bolcher__WebPage_.Pages
 {
     public class BolcherModel : PageModel
     {
-
+        public string NumberCount= string.Empty;
         string SearchText = string.Empty;
-
+        public string Message = string.Empty;
         public List<Bolcher> bolchers = new List<Bolcher>();
         public Bolcher bolcher = new Bolcher();
         Db db = new Db();
@@ -24,29 +24,61 @@ namespace H_3_Bolcher__WebPage_.Pages
         }
         public void OnPostVisalle()
         {
+            //SQL-03 (1)
             bolchers = db.GetAllBolcher();
         }
         public void OnPostSearch()
         {
+            NumberCount = "1";
             string SearchBox = Request.Form["SearchBox"].ToString();
+            string FaveSelect = Request.Form["FaveSelect"].ToString();
             SearchBox = SearchBox.Trim();
             string CheckBoxFromBegining = Request.Form["CheckFromBegining"].ToString();
-            if (!SearchBox.IsNullOrEmpty())
+            if (!SearchBox.IsNullOrEmpty() || !FaveSelect.IsNullOrEmpty())
             {
-
-
-                if (CheckBoxFromBegining == "on")
+                //SQL-03 (4)
+                if (!FaveSelect.IsNullOrEmpty())
                 {
-                    bolchers = db.GetAllBolcherWhereSearchWordIsFromBegining(SearchBox);
+                    if (SearchBox.IsNullOrEmpty())
+                    {
+                        bolchers = db.GetAllBolcherWithColor(FaveSelect);
+                    }
+                    else
+                    {
+                        if (CheckBoxFromBegining == "on")
+                        {
+                            bolchers = db.GetAllBolcherWhereSearchWordIsFromBeginingWithColor(SearchBox, FaveSelect);
+                        }
+                        else
+                        {
+                            bolchers = db.GetAllBolcherWhereSearchWordIsWithColor(SearchBox, FaveSelect);
+                        }
+                    }
                 }
                 else
                 {
-                    bolchers = db.GetAllBolcherWhereSearchWordIs(SearchBox);
+                    if (!SearchBox.IsNullOrEmpty())
+                    {
+                        if (CheckBoxFromBegining == "on")
+                        {
+                            //SQL-03 (2)
+                            bolchers = db.GetAllBolcherWhereSearchWordIsFromBegining(SearchBox);
+                        }
+                        else
+                        {
+                            //SQL-03 (3)
+                            bolchers = db.GetAllBolcherWhereSearchWordIs(SearchBox);
 
+                        }
+                    }
                 }
             }
             else
             {
+               
+                    Message = "Vælg søgekriterier eller klik på Vis alle";
+                NumberCount = "0";
+
 
             }
         }
