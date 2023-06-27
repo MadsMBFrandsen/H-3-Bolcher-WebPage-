@@ -1,0 +1,81 @@
+﻿@page
+@model H_3_Bolcher__WebPage_.Pages.BolcherModel
+@{
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Bolcher</h1>
+    
+    <button class="btn btn-success" onclick="BtnHide()">Delete Content</button>
+</div>
+<form method="post">
+    <table>
+        <tr>
+            <td><input type="submit" id="btnVisalle" value="Vis alle" asp-page-handler="Visalle" /></td>
+            <td><input type="search" id="TextSearch" name="SearchBox"  asp-page-handler="TextSearch" /></td>
+            <td><input type="submit" id="btnSearch" value="Search" asp-page-handler="Search" /></td>
+            <td>FromBegining</td>
+            <td><input type="checkbox" id="CheckSearch" name="CheckFromBegining" asp-page-handler="CheckSearch" /></td>
+
+            @*<td><input type="submit" id="btnSearch" value="Search" asp-page-handler="Search" /></td>*@
+        </tr>
+    </table>
+</form>
+@if (Model.bolchers.Count != 0)
+{
+    <table id="BolcherList">
+        <thead>
+            <tr style="margin:0,0,10%,0">
+                <th>Navn</th>
+                <th>Faver</th>
+                <th>Vægt_i_gram</th>
+                <th>Smag_Surhed</th>
+                <th>Smag_Styrke</th>
+                <th>Smag_Type</th>
+                <th>Råvarepris_i_øre</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Models.Bolcher item in Model.bolchers)
+            {
+                <tr style="margin:0,0,10%,0">
+                    <td>@item.Navn</td>
+                    <td>@item.Faver</td>
+                    <td>@item.Vægt_i_gram</td>
+                    <td>@item.Smag_Surhed</td>
+                    <td>@item.Smag_Styrke</td>
+                    <td>@item.Smag_Type</td>
+                    <td>@item.Råvarepris_i_øre</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+<script>
+    function BtnHide() {
+        document.getElementById("BolcherList").innerHTML = "";
+    }
+</script>
+
+
+<script type="text/javascript">
+    $('#BtnHide').click(function () {
+        //$('#BolcherList').hide();
+        $("#BolcherList").html("");
+    });
+</script>
+
+
+
+
+@if (ViewData["Message"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert('@ViewData["Message"]');
+        };
+    </script>
+}
