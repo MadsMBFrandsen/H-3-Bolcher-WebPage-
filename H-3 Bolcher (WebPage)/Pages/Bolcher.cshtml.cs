@@ -9,10 +9,11 @@ namespace H_3_Bolcher__WebPage_.Pages
 {
     public class BolcherModel : PageModel
     {
-        public string NumberCount= string.Empty;
+        public string NumberCount = string.Empty;
         string SearchText = string.Empty;
         public string Message = string.Empty;
         public List<Bolcher> bolchers = new List<Bolcher>();
+        public List<Bolche_Omkostninger> bolche_omkostninger = new List<Bolche_Omkostninger>();
         public Bolcher bolcher = new Bolcher();
         Db db = new Db();
         public void OnGet()
@@ -75,12 +76,13 @@ namespace H_3_Bolcher__WebPage_.Pages
             }
             else
             {
-               
-                    Message = "Vælg søgekriterier eller klik på Vis alle";
+                Message = "Vælg søgekriterier eller klik på Vis alle";
                 NumberCount = "0";
-
-
             }
+        }
+        public void OnPostBtnSalgspris_pr_100_gram()
+        {
+            bolche_omkostninger = db.GetAllBolcherWithNettoprisAndSalgspris();
         }
     }
 }

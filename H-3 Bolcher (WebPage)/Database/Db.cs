@@ -15,12 +15,7 @@ namespace H_3_Bolcher__WebPage_.Database
             List<Bolcher> list = new List<Bolcher>();
             Bolcher b = null;
             string queryString = " EXEC GetAllFromBolche;";
-            string queryString1 =
-                "select b.Navn, f.Navn,b.Vægt_i_gram,ssu.Navn,sst.Navn,st.Navn,b.Råvarepris_i_øre" +
-                "from Bolche b inner join Faver f on b.FarveId = f.FarveId " +
-                "inner join Smag_Surhed ssu on b.Smag_SurhedId = ssu.Smag_SurhedId" +
-                "inner join Smag_Styrke sst on b.Smag_StyrkeId = sst.Smag_StyrkeId" +
-                "inner join Smag_Type st on b.Smag_TypeId = st.Smag_TypeId";
+
 
             //DB connection inside a using clause to ensure the closing of connection when done.
             using (SqlConnection connection = new SqlConnection(CornectionString))
@@ -28,20 +23,15 @@ namespace H_3_Bolcher__WebPage_.Database
                 //OPEN CONNECTION
                 connection.Open();
 
-                //SqlCommand command = new SqlCommand(queryString, connection);
-                //command.Connection.Open();
-                //command.ExecuteNonQuery();
+
 
                 //Create a new SQL query command
                 using (SqlCommand command = new SqlCommand(queryString, connection))
                 {
                     command.CommandText = queryString;
-                    //SqlCommand sqlc = new SqlCommand(queryString, connection);
-                    //sqlc.ExecuteNonQuery();
+
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-
-
                         //Read the data
                         while (reader.Read())
                         {
@@ -66,13 +56,9 @@ namespace H_3_Bolcher__WebPage_.Database
                                 Smag_Type = Smag_Type,
                                 Råvarepris_i_øre = Råvarepris_i_øre,
                             });
-
                         }
-
                     }
-                    ////Execute the command and send the query to the database with a data reader
                 }
-                //not necessary 
                 connection.Close();
             }
 
@@ -87,9 +73,9 @@ namespace H_3_Bolcher__WebPage_.Database
         public List<Bolcher> /*Bolcher*/ GetAllBolcherWhereSearchWordIs(string SearchBox)
         {
             List<Bolcher> list = new List<Bolcher>();
-            
+
             string queryString = "EXEC GetAllFromBolcheWhereSearchWordIs @SearchWord =" + SearchBox;
-            
+
 
             //DB connection inside a using clause to ensure the closing of connection when done.
             using (SqlConnection connection = new SqlConnection(CornectionString))
@@ -97,17 +83,15 @@ namespace H_3_Bolcher__WebPage_.Database
                 //OPEN CONNECTION
                 connection.Open();
 
-                
+
 
                 //Create a new SQL query command
                 using (SqlCommand command = new SqlCommand(queryString, connection))
                 {
                     command.CommandText = queryString;
-                    
+
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-
-
                         //Read the data
                         while (reader.Read())
                         {
@@ -132,13 +116,9 @@ namespace H_3_Bolcher__WebPage_.Database
                                 Smag_Type = Smag_Type,
                                 Råvarepris_i_øre = Råvarepris_i_øre,
                             });
-
                         }
-
                     }
-                    ////Execute the command and send the query to the database with a data reader
                 }
-                //not necessary 
                 connection.Close();
             }
 
@@ -151,27 +131,17 @@ namespace H_3_Bolcher__WebPage_.Database
             Bolcher b = null;
             string queryString = " EXEC GetAllFromBolcheWhereSearchWordIsFromBegining @SearchWord =" + SearchBox;
 
-
             //DB connection inside a using clause to ensure the closing of connection when done.
             using (SqlConnection connection = new SqlConnection(CornectionString))
             {
                 //OPEN CONNECTION
                 connection.Open();
-
-                //SqlCommand command = new SqlCommand(queryString, connection);
-                //command.Connection.Open();
-                //command.ExecuteNonQuery();
-
                 //Create a new SQL query command
                 using (SqlCommand command = new SqlCommand(queryString, connection))
                 {
                     command.CommandText = queryString;
-                    //SqlCommand sqlc = new SqlCommand(queryString, connection);
-                    //sqlc.ExecuteNonQuery();
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-
-
                         //Read the data
                         while (reader.Read())
                         {
@@ -196,25 +166,20 @@ namespace H_3_Bolcher__WebPage_.Database
                                 Smag_Type = Smag_Type,
                                 Råvarepris_i_øre = Råvarepris_i_øre,
                             });
-
                         }
-
                     }
-                    ////Execute the command and send the query to the database with a data reader
                 }
-                //not necessary 
                 connection.Close();
             }
 
             return list;
         }
 
-        public List<Bolcher> /*Bolcher*/ GetAllBolcherWhereSearchWordIsFromBeginingWithColor(string SearchBox,string Color)
+        public List<Bolcher> /*Bolcher*/ GetAllBolcherWhereSearchWordIsFromBeginingWithColor(string SearchBox, string Color)
         {
             List<Bolcher> list = new List<Bolcher>();
             Bolcher b = null;
-            string queryString = " EXEC GetAllBolcherWhereSearchWordIsFromBeginingWithColor @SearchWord =" + SearchBox+", @Color ="+Color;
-            
+            string queryString = " EXEC GetAllBolcherWhereSearchWordIsFromBeginingWithColor @SearchWord =" + SearchBox + ", @Color =" + Color;
 
             //DB connection inside a using clause to ensure the closing of connection when done.
             using (SqlConnection connection = new SqlConnection(CornectionString))
@@ -222,20 +187,13 @@ namespace H_3_Bolcher__WebPage_.Database
                 //OPEN CONNECTION
                 connection.Open();
 
-                //SqlCommand command = new SqlCommand(queryString, connection);
-                //command.Connection.Open();
-                //command.ExecuteNonQuery();
-
                 //Create a new SQL query command
                 using (SqlCommand command = new SqlCommand(queryString, connection))
                 {
                     command.CommandText = queryString;
-                    //SqlCommand sqlc = new SqlCommand(queryString, connection);
-                    //sqlc.ExecuteNonQuery();
+
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-
-
                         //Read the data
                         while (reader.Read())
                         {
@@ -260,13 +218,9 @@ namespace H_3_Bolcher__WebPage_.Database
                                 Smag_Type = Smag_Type,
                                 Råvarepris_i_øre = Råvarepris_i_øre,
                             });
-
                         }
-
                     }
-                    ////Execute the command and send the query to the database with a data reader
                 }
-                //not necessary 
                 connection.Close();
             }
 
@@ -285,20 +239,13 @@ namespace H_3_Bolcher__WebPage_.Database
                 //OPEN CONNECTION
                 connection.Open();
 
-                //SqlCommand command = new SqlCommand(queryString, connection);
-                //command.Connection.Open();
-                //command.ExecuteNonQuery();
-
                 //Create a new SQL query command
                 using (SqlCommand command = new SqlCommand(queryString, connection))
                 {
                     command.CommandText = queryString;
-                    //SqlCommand sqlc = new SqlCommand(queryString, connection);
-                    //sqlc.ExecuteNonQuery();
+
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-
-
                         //Read the data
                         while (reader.Read())
                         {
@@ -323,19 +270,15 @@ namespace H_3_Bolcher__WebPage_.Database
                                 Smag_Type = Smag_Type,
                                 Råvarepris_i_øre = Råvarepris_i_øre,
                             });
-
                         }
-
                     }
-                    ////Execute the command and send the query to the database with a data reader
                 }
-                //not necessary 
                 connection.Close();
             }
 
             return list;
         }
-        public List<Bolcher> /*Bolcher*/ GetAllBolcherWithColor( string Color)
+        public List<Bolcher> /*Bolcher*/ GetAllBolcherWithColor(string Color)
         {
             List<Bolcher> list = new List<Bolcher>();
             Bolcher b = null;
@@ -348,20 +291,13 @@ namespace H_3_Bolcher__WebPage_.Database
                 //OPEN CONNECTION
                 connection.Open();
 
-                //SqlCommand command = new SqlCommand(queryString, connection);
-                //command.Connection.Open();
-                //command.ExecuteNonQuery();
-
                 //Create a new SQL query command
                 using (SqlCommand command = new SqlCommand(queryString, connection))
                 {
                     command.CommandText = queryString;
-                    //SqlCommand sqlc = new SqlCommand(queryString, connection);
-                    //sqlc.ExecuteNonQuery();
+
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-
-
                         //Read the data
                         while (reader.Read())
                         {
@@ -386,16 +322,64 @@ namespace H_3_Bolcher__WebPage_.Database
                                 Smag_Type = Smag_Type,
                                 Råvarepris_i_øre = Råvarepris_i_øre,
                             });
-
                         }
-
                     }
-                    ////Execute the command and send the query to the database with a data reader
                 }
-                //not necessary 
                 connection.Close();
             }
 
+            return list;
+        }
+
+        public List<Bolche_Omkostninger> /*Bolcher*/ GetAllBolcherWithNettoprisAndSalgspris()
+        {
+            List<Bolche_Omkostninger> list = new List<Bolche_Omkostninger>();
+            Bolche_Omkostninger b = null;
+            string queryString = " EXEC GetAllBolcherWithNettoprisAndSalgspris";
+
+
+            //DB connection inside a using clause to ensure the closing of connection when done.
+            using (SqlConnection connection = new SqlConnection(CornectionString))
+            {
+                //OPEN CONNECTION
+                connection.Open();
+
+                //Create a new SQL query command
+                using (SqlCommand command = new SqlCommand(queryString, connection))
+                {
+                    command.CommandText = queryString;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+
+                        //Read the data
+                        while (reader.Read())
+                        {
+                            int Id = (int)reader["Id"];
+                            string Navn = (string)reader["Navn"];
+                            int Råvarepris_i_øre = (int)reader["Råvarepris_i_øre"];
+                            int Vægt_i_gram = (int)reader["Vægt_i_gram"];
+                            Decimal Nettopris = (Decimal)reader["Nettopris"];
+                            Decimal Salgspris = (Decimal)reader["Salgspris"];
+                            Decimal Salgspris_pr_100_gram = (Decimal)reader["Salgspris_pr_100_gram"];
+
+
+                            //do stuff 
+                            list.Add(new Bolche_Omkostninger()
+                            {
+                                Id = Id,
+                                Navn = Navn,
+                                Vægt_i_gram = Vægt_i_gram,
+                                Råvarepris_i_øre = Råvarepris_i_øre,
+                                Nettopris = Nettopris,
+                                Salgspris = Salgspris,
+                                Salgspris_pr_100_gram = Salgspris_pr_100_gram
+                            });
+                        }
+                    }
+                }
+                connection.Close();
+            }
             return list;
         }
     }
