@@ -382,5 +382,53 @@ namespace H_3_Bolcher__WebPage_.Database
             }
             return list;
         }
+
+
+        public List<Kunde_ordrer> /*Kunder*/ GetAllFromKundeWithOrdres(string BolcheName)
+        {
+            List<Kunde_ordrer> list = new List<Kunde_ordrer>();
+            Kunde_ordrer b = null;
+            string queryString = "EXEC KundeWithOrdres @BolcheName ='" + BolcheName+"'";
+
+
+            //DB connection inside a using clause to ensure the closing of connection when done.
+            using (SqlConnection connection = new SqlConnection(CornectionString))
+            {
+                //OPEN CONNECTION
+                connection.Open();
+
+                //Create a new SQL query command
+                using (SqlCommand command = new SqlCommand(queryString, connection))
+                {
+                    command.CommandText = queryString;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+
+                        //Read the data
+                        while (reader.Read())
+                        {
+                            //int Id = (int)reader["Id"];
+                            string Fornavn = (string)reader["Fornavn"];
+                            string Efternavn = (string)reader["Efternavn"];
+                            string Bolchenavn = (string)reader["Bolchenavn"];
+                            DateTime Ordredato = (DateTime)reader["Ordredato"];
+
+                                                         
+                            list.Add(new Kunde_ordrer()
+                            {
+                                //Kunde_ordrerId = Id,
+                                Fornavn = Fornavn,
+                                Efternavn = Efternavn,
+                                Bolchenavn = Bolchenavn,
+                                Ordredato = Ordredato
+                            });
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            return list;
+        }
     }
 }

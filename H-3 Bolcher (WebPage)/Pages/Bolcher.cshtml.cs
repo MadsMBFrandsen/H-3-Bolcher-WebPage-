@@ -13,16 +13,16 @@ namespace H_3_Bolcher__WebPage_.Pages
         string SearchText = string.Empty;
         public string Message = string.Empty;
         public List<Bolcher> bolchers = new List<Bolcher>();
+        public List<Bolcher> bolchers2 = new List<Bolcher>();
         public List<Bolche_Omkostninger> bolche_omkostninger = new List<Bolche_Omkostninger>();
+        public List<Kunde_ordrer> kundeordrer = new List<Kunde_ordrer>();
         public Bolcher bolcher = new Bolcher();
         Db db = new Db();
         public void OnGet()
         {
-
-
-            //bolchers = db.GetAllBolcher();
-
+            bolchers2 = db.GetAllBolcher();
         }
+
         public void OnPostVisalle()
         {
             //SQL-03 (1)
@@ -83,6 +83,17 @@ namespace H_3_Bolcher__WebPage_.Pages
         public void OnPostBtnSalgspris_pr_100_gram()
         {
             bolche_omkostninger = db.GetAllBolcherWithNettoprisAndSalgspris();
+        }
+        public void OnPostAllKunder()
+        {
+            //GetAllFromKundeWithOrdres
+            bolchers2 = db.GetAllBolcher();
+            string bolchenavne = Request.Form["bolchenavne"].ToString();
+            if (!bolchenavne.IsNullOrEmpty())
+            {
+                kundeordrer = db.GetAllFromKundeWithOrdres(bolchenavne);
+            }
+
         }
     }
 }

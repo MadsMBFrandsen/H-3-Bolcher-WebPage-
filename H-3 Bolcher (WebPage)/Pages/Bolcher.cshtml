@@ -9,6 +9,7 @@
 
     <button class="btn btn-success" onclick="BtnHide()">Delete Visalle</button>
     <button class="btn btn-success" onclick="BtnHide1()">Delete Salgspris</button>
+    <button class="btn btn-success" onclick="BtnHide2()">Delete Kunde Order</button>
 </div>
 <form method="post">
     <table>
@@ -30,6 +31,18 @@
                 </select>
             </td>
             <td><input type="submit" id="BtnSalgspris_pr_100_gram" value="Salgspris pr 100 gram" asp-page-handler="BtnSalgspris_pr_100_gram" /></td>
+
+            <td>
+                <select name="bolchenavne">
+                    <option value="">Ingen Bolche</option>
+                    @foreach (H_3_Bolcher__WebPage_.Models.Bolcher item in Model.bolchers2)
+                    {
+                        <option value="@item.Navn">@item.Navn</option>
+                    }
+                </select>
+            </td>
+
+            <td><input type="submit" id="AllKunder" value="Kunder" asp-page-handler="AllKunder" /></td>
 
             @*<td><input type="submit" id="btnSearch" value="Search" asp-page-handler="Search" /></td>*@
         </tr>
@@ -112,14 +125,51 @@
     </table>
 }
 
+
+
+@if (Model.kundeordrer.Count != 0)
+{
+    <table id="KundeordrerList">
+        <thead>
+            <tr style="margin:0,0,10%,0">
+                <th>Fornavn</th>
+                <th>Efternavn</th>
+                <th>Bolchenavn</th>
+                <th>Ordredato</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Models.Kunde_ordrer item in Model.kundeordrer)
+            {
+                <tr style="margin:0,0,10%,0">
+                    <td>@item.Fornavn</td>
+                    <td>@item.Efternavn</td>
+                    <td>@item.Bolchenavn</td>
+                    <td>@item.Ordredato</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+
+
+
+
+
 <script>
     function BtnHide() {
         document.getElementById("BolcherList").innerHTML = "";
-        
+
     }
     function BtnHide1() {
-      
+
         document.getElementById("BolcherOmkostningerList").innerHTML = "";
+    }
+    function BtnHide2() {
+
+        document.getElementById("KundeordrerList").innerHTML = "";
     }
 </script>
 
